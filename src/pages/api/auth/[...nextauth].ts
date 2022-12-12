@@ -6,7 +6,6 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "../../../server/db/client";
 
 export const authOptions: NextAuthOptions = {
-  // Include user.id on session
   callbacks: {
     jwt: async ({ token, user }) => {
       if (user) {
@@ -43,8 +42,6 @@ export const authOptions: NextAuthOptions = {
           headers: { "Content-Type": "application/json" },
         });
         const user = await res.json();
-
-        console.log(user);
 
         // If no error and we have user data, return it
         if (res.ok && user) {
